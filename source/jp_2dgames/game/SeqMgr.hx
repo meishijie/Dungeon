@@ -282,6 +282,7 @@ class SeqMgr {
             // インベントリを開く
             if(_inventory.checkOpen()) {
               // 開ける
+			  PlayState.hudCam.alpha = 0.5;
               _inventory.setActive(true);
               _change(State.InventoryInput);
             }

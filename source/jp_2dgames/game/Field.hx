@@ -387,9 +387,9 @@ class Field {
     _tweenColor = FlxTween.color(_sprWave, 5, FlxColor.WHITE, NIGHTMARE_COLOR, {ease:FlxEase.sineOut, onComplete:function(tween:FlxTween) {
       _tweenColor = null; // 完了したら参照を消す
     }});
-    _tweenWave = FlxTween.tween(_sprWave, {strength:3, speed:5}, 10, {ease:FlxEase.sineOut, onComplete:function(tween:FlxTween) {
+    /*_tweenWave = FlxTween.tween(_sprWave, {strength:3}, 10, {ease:FlxEase.sineOut, onComplete:function(tween:FlxTween) {
       _tweenWave = null; // 完了したら参照を消す
-    }});
+    }});*/
   }
   public static function resetFadeBackGround():Void {
     if(_tweenColor != null) {
@@ -404,7 +404,7 @@ class Field {
     }
 
     FlxTween.color(_sprWave, 0.3, NIGHTMARE_COLOR, FlxColor.WHITE, {ease:FlxEase.sineOut});
-    FlxTween.tween(_sprWave, {strength:0, speed:0}, 0.3, {ease:FlxEase.sineOut});
+    /*FlxTween.tween(_sprWave, {strength:0}, 0.3, {ease:FlxEase.sineOut});*/
   }
 
   /**

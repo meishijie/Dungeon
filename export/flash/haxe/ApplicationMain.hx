@@ -466,11 +466,11 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/images/monster/insectivorous_plant.png");
+		urls.push ("assets/images/monster/insect_demon.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/images/monster/insect_demon.png");
+		urls.push ("assets/images/monster/insectivorous_plant.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -1467,7 +1467,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "53",
+			build: "66",
 			company: "HaxeFlixel",
 			file: "RogueLike",
 			fps: 60,

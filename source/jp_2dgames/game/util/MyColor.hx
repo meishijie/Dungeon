@@ -21,7 +21,7 @@ class MyColor {
   public static inline var COMMAND_TEXT_SELECTED:Int = 0x000066;
   public static inline var COMMAND_TEXT_UNSELECTED:Int = 0x99FFCC;
 
-  public static inline var DETAIL_FRAME:Int = 0x000033;
+  public static inline var DETAIL_FRAME:Int = 0x009933;
   public static inline var MESSAGE_WINDOW:Int = 0x000033;
 
   public static inline function strToColor(str:String):Int {

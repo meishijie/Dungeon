@@ -100,6 +100,19 @@ class KeyOn {
     }*/
     return false;
   }
+   public var C(get, never):Bool;
+
+  inline function get_C() {
+    if(Key.checkC(FlxG.keys.pressed)) {
+      return true;
+    }
+   
+	/*if(GuiKey.aUp == true){
+
+      return true;
+    }*/
+    return false;
+  }
   public var X(get, never):Bool;
 
   inline function get_X() {
@@ -218,6 +231,15 @@ class KeyPress {
     }
     return false;
   }
+  public var C(get, never):Bool;
+
+  inline function get_C() {
+    if(Key.checkC(FlxG.keys.justPressed)) {
+      return true;
+    }
+   
+    return false;
+  }
   public var X(get, never):Bool;
 
   inline function get_X() {
@@ -250,12 +272,12 @@ class Key {
   public static var press:KeyPress = new KeyPress();
 
   public static function checkA(k:FlxKeyList):Bool {
-    if(k.check(FlxKey.ENTER)) {
-      return true;
-    }
-    if(k.check(FlxKey.A)) {
-      return true;
-    }
+//    if(k.check(FlxKey.ENTER)) {
+//      return true;
+//    }
+//    if(k.check(FlxKey.A)) {
+//      return true;
+//    }
 	if(GuiKey.bg1 != null){
 		if(GuiKey.bg1.buttonA.justReleased){
 			return true;
@@ -268,13 +290,29 @@ class Key {
   }
 
   public static function checkB(k:FlxKeyList):Bool {
-    if(k.check(FlxKey.SHIFT)) {
-      return true;
-    }
-    if(k.check(FlxKey.X)) {
-      return true;
-    }
+//    if(k.check(FlxKey.SHIFT)) {
+//      return true;
+//    }
+//    if(k.check(FlxKey.X)) {
+//      return true;
+//    }
 	if(GuiKey.bg1.buttonB.justReleased){
+		return true;
+	}
+	/*if(GuiKey.bUp == true){
+	  GuiKey.bUp = false;
+      return true;
+    }*/
+    return false;
+  }
+  public static function checkC(k:FlxKeyList):Bool {
+//    if(k.check(FlxKey.SHIFT)) {
+//      return true;
+//    }
+//    if(k.check(FlxKey.X)) {
+//      return true;
+//    }
+	if(GuiKey.bg1.buttonC.justReleased){
 		return true;
 	}
 	/*if(GuiKey.bUp == true){
@@ -285,19 +323,19 @@ class Key {
   }
 
   public static function checkX(k:FlxKeyList):Bool {
-    if(k.check(FlxKey.SPACE)) {
-      return true;
-    }
-    if(k.check(FlxKey.C)) {
-      return true;
-    }
+//    if(k.check(FlxKey.SPACE)) {
+//      return true;
+//    }
+//    if(k.check(FlxKey.C)) {
+//      return true;
+//    }
     return false;
   }
 
   public static function checkY(k:FlxKeyList):Bool {
-    if(k.check(FlxKey.V)) {
-      return true;
-    }
+//    if(k.check(FlxKey.V)) {
+//      return true;
+//    }
     return false;
   }
 }

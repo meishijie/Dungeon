@@ -125,6 +125,9 @@ class PlayState extends FlxState {
 
   //屏幕按键
   private var _guiKey:GuiKey;
+  
+  //
+  public static var hudCam:FlxCamera;
   /**
 	 * 生成
 	 */
@@ -198,7 +201,7 @@ class PlayState extends FlxState {
     var strBgm = TextUtil.fillZero(nBgm, 3);
     Snd.playMusic(strBgm);
 	_guiKey = new GuiKey();
-	add(_guiKey);
+	
   }
 
   private function _floorStart():Void {
@@ -335,12 +338,13 @@ class PlayState extends FlxState {
     // メッセージ生成
     var message = new Message(_csv.message, _csv.hint);
     Message.instance = message;
+	// ui提示信息
     UIText.instance = new UIText(_csv.uitext);
 
     // ステータス表示
     _guistatus = new GuiStatus();
     this.add(_guistatus);
-
+	
     // パーティクル
     var particles = new FlxTypedGroup<Particle>(256);
     for(i in 0...particles.maxSize) {
@@ -408,16 +412,18 @@ class PlayState extends FlxState {
     }
 
     // メッセージを描画に登録
-    this.add(message);
+	//拾取物品描述信息
+    //this.add(message);
 
     // インベントリ
     var inventory = new Inventory();
     this.add(inventory);
-    
-    var hudCam = new FlxCamera(440, 0, 200, 200);
+	//物品镜头
+    hudCam = new FlxCamera(100, 50, 500, 300);
 		hudCam.zoom = 1; // For 1/2 zoom out.
-		hudCam.follow(Inventory._invBG, FlxCameraFollowStyle.NO_DEAD_ZONE);
-		hudCam.alpha = .5;
+		hudCam.follow(Inventory._invBG);
+		hudCam.targetOffset.y = 100;
+		hudCam.alpha = 0;
     FlxG.camera.antialiasing = false;
 		FlxG.cameras.add(hudCam);
     
@@ -478,6 +484,9 @@ class PlayState extends FlxState {
     _debugItem = new DropItem();
     _debugItem.alpha = 0.5;
     this.add(_debugItem);
+	
+	//
+	add(_guiKey);
   }
 
   /**
@@ -626,12 +635,12 @@ class PlayState extends FlxState {
         // おしまい
     }
 
-#if debug
+//#if debug
     if(_state == State.Main) {
       // デバッグ処理
       updateDebug();
     }
-#end
+//#end
   }
 
   /**

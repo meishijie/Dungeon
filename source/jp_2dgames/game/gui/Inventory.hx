@@ -83,7 +83,7 @@ class Inventory extends FlxGroup {
 
   // 背包系统位置
   private static inline var POS_X = -500;
-  private static inline var POS_Y = 8;
+  private static inline var POS_Y = 0;
   // ウィンドウサイズ
   private static inline var WIDTH = 212 - 8 * 2;
   private static inline var HEIGHT = (DY * PAGE_DISP) + MSG_POS_Y + 8;//480 - 64 - 8 * 2;
@@ -493,7 +493,7 @@ public static var _invBG:FlxSprite;
   public function new() {
     super();
 
-    _invBG = new FlxSprite(POS_X, y, "assets/images/ui/listitem.png");
+    _invBG = new FlxSprite(x, y, "assets/images/ui/listitem.png");
     _invBG.alpha = 0.01;
     this.add(_invBG);
     // ページ数
@@ -702,8 +702,8 @@ public static var _invBG:FlxSprite;
       _setDispPageArrow(false);
     }
 
-    // 詳細表示切り替え
-    showDetail(b);
+    // 展示物品详细信息
+    //showDetail(b);
   }
 
   /**
@@ -983,6 +983,7 @@ public static var _invBG:FlxSprite;
 
         if(Key.press.B) {
           // メニューを閉じる
+		  PlayState.hudCam.alpha = 0;
           _cursor.visible = false;
           return RET_CANCEL;
         }

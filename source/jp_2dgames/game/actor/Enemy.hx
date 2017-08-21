@@ -523,13 +523,17 @@ override public function update(elapsed:Float):Void
       // 移動できない
       return Dir.None;
     }
+
     var x1 = path[0].x;
     var y1 = path[0].y;
     var x2 = path[1].x;
     var y2 = path[1].y;
+
     var dir = DirUtil.look(x1, y1, x2, y2);
+
     var pt = FlxPoint.get(xchip, ychip);
     pt = DirUtil.move(dir, pt);
+    //pt就是将要移动到的坐标
     var px = Std.int(pt.x);
     var py = Std.int(pt.y);
     pt.put();
@@ -607,7 +611,7 @@ override public function update(elapsed:Float):Void
   }
 
   /**
-	 * 移動方向を決める
+	 * 决定移动方向
 	 **/
   private function _aiMoveDir():Dir {
 
@@ -636,18 +640,19 @@ override public function update(elapsed:Float):Void
 
   private function _isMove(xnext:Int, ynext:Int):Bool {
     var bHit:Bool = false;
+
     parent.forEachAlive(function(e:Enemy) {
       if(xnext == e.xchip && ynext == e.ychip) {
-        // 移動先に敵がいる
+        // 移动单位有敌人
         bHit = true;
       }
     });
     if(bHit) {
-      // 敵がいるので移動できない
+      // 因为有敌人，所以不能移动
       return false;
     }
 
-    // 飛行属性を取得する
+    // 取得飞行属性
     var fly = _getCsvParam("fly");
     switch(fly) {
       case "fly":
@@ -665,17 +670,17 @@ override public function update(elapsed:Float):Void
       default:
         // 通常
         if(Field.isMove(xnext, ynext, "", _dir) == false) {
-          // 壁なので移動できない
+          // 因为是墙壁所以不能移动
           return false;
         }
     }
 
-    // 移動できる
+    // 可移动的
     return true;
   }
 
   /**
-   * ターゲットに対して攻撃可能かどうか
+   * 对目标是否会进行攻击
    **/
   private function _checkAttack():Bool {
 
@@ -827,14 +832,14 @@ override public function update(elapsed:Float):Void
     // 移動方向を反映
     _changeAnime();
 
-    // 移動先にプレイヤーがいるかどうかをチェック
+    // 移动的下一个是否有主角
     if(target.existsPosition(xnext, ynext)) {
-      // プレイヤーがいるので攻撃
+      // 因为有主角，所以攻击
       _change(Actor.State.ActBegin);
       return;
     }
 
-    // 移動先チェック
+    // 移动单位检查
     if(_isMove(xnext, ynext)) {
       // 移動可能
       _xnext = xnext;

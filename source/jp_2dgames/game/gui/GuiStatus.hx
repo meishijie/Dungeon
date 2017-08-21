@@ -15,7 +15,7 @@ import flixel.FlxG;
 import flixel.ui.FlxBar;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
-
+import flixel.FlxBasic;
 /**
  * ステータス表示
  **/
@@ -175,7 +175,7 @@ class GuiStatus extends FlxGroup {
 
     // ■敵情報
     _enemyInfo = new GuiEnemy();
-    this.add(_enemyInfo);
+    //this.add(_enemyInfo);
 
     // ■ナイトメア情報
     _nightmareInfo = new GuiNightmare();
@@ -194,11 +194,15 @@ class GuiStatus extends FlxGroup {
     _txtHelp = new FlxText(HELP_X, 0, 640);
     _txtHelp.setFormat(Reg.PATH_FONT, Reg.FONT_SIZE_S);
     _help.add(_txtHelp);
-    this.add(_help);
+    //this.add(_help);
 
     // ヘルプテキスト設定
     changeHelp(HELP_KEYINPUT);
-  }
+	_group.forEach(function(spr:FlxSprite)
+         {
+             spr.scrollFactor.set(0, 0);
+         });
+	}
 
   /**
 	 * 更新
@@ -358,6 +362,7 @@ override public function update(elapsed:Float):Void
     }
 
     _txtHelp.text = text;
+	
     _help.y = FlxG.height;
 
     // アニメーション開始

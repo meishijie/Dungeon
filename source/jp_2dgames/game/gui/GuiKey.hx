@@ -14,6 +14,7 @@ class GuiKey extends FlxSpriteGroup
 	public static var bg1:FlxVirtualPad;
 	public static var aUp:Bool = false;
 	public static var bUp:Bool = false;
+	public static var cUp:Bool = false;
 	public static var upUp:Bool = false;
 	public static var downUp:Bool = false;
 	public static var leftUp:Bool = false;
@@ -26,7 +27,7 @@ class GuiKey extends FlxSpriteGroup
 		/*bg = new FlxSpriteButton(0, 0, null, null);
 		bg.loadGraphic("assets/images/pad/background.png");
 		add(bg);*/
-		bg1 = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.A_B);
+		bg1 = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.A_B_C);
 		add(bg1);
 		bg1.scrollFactor.set(0,0);
 		bg1.y -= 50;
@@ -34,6 +35,9 @@ class GuiKey extends FlxSpriteGroup
 		bg1.buttonB.onUp.callback = btnBUp;
 		bg1.buttonA.onDown.callback = btnADown;
 		bg1.buttonB.onDown.callback = btnBDown;
+		bg1.buttonC.onUp.callback = btnCUp;
+		bg1.buttonC.onDown.callback = btnCDown;
+		
 		bg1.buttonUp.onUp.callback = btnUpUp;
 		bg1.buttonUp.onDown.callback = btnUpDown;
 		bg1.buttonDown.onUp.callback = btnDownUp;
@@ -61,6 +65,15 @@ class GuiKey extends FlxSpriteGroup
 	function btnBDown():Void{
 		bUp = true;
 		
+
+	}
+	function btnCUp():Void{
+		cUp = false;
+
+	}
+	
+	function btnCDown():Void{
+		cUp = true;
 
 	}
 	function btnUpUp():Void{

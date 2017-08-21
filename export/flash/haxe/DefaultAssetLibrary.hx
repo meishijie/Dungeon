@@ -618,10 +618,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/monster/ice_demon.png", AssetType.IMAGE);
 		className.set ("assets/images/monster/imp.png", __ASSET__assets_images_monster_imp_png);
 		type.set ("assets/images/monster/imp.png", AssetType.IMAGE);
-		className.set ("assets/images/monster/insectivorous_plant.png", __ASSET__assets_images_monster_insectivorous_plant_png);
-		type.set ("assets/images/monster/insectivorous_plant.png", AssetType.IMAGE);
 		className.set ("assets/images/monster/insect_demon.png", __ASSET__assets_images_monster_insect_demon_png);
 		type.set ("assets/images/monster/insect_demon.png", AssetType.IMAGE);
+		className.set ("assets/images/monster/insectivorous_plant.png", __ASSET__assets_images_monster_insectivorous_plant_png);
+		type.set ("assets/images/monster/insectivorous_plant.png", AssetType.IMAGE);
 		className.set ("assets/images/monster/invader.png", __ASSET__assets_images_monster_invader_png);
 		type.set ("assets/images/monster/invader.png", AssetType.IMAGE);
 		className.set ("assets/images/monster/iron_golem.png", __ASSET__assets_images_monster_iron_golem_png);
@@ -1529,11 +1529,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "assets/images/monster/insectivorous_plant.png";
+		id = "assets/images/monster/insect_demon.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "assets/images/monster/insect_demon.png";
+		id = "assets/images/monster/insectivorous_plant.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -2814,11 +2814,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/images/monster/imp.png", __ASSET__assets_images_monster_imp_png);
 		type.set ("assets/images/monster/imp.png", AssetType.IMAGE);
 		
-		className.set ("assets/images/monster/insectivorous_plant.png", __ASSET__assets_images_monster_insectivorous_plant_png);
-		type.set ("assets/images/monster/insectivorous_plant.png", AssetType.IMAGE);
-		
 		className.set ("assets/images/monster/insect_demon.png", __ASSET__assets_images_monster_insect_demon_png);
 		type.set ("assets/images/monster/insect_demon.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/monster/insectivorous_plant.png", __ASSET__assets_images_monster_insectivorous_plant_png);
+		type.set ("assets/images/monster/insectivorous_plant.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/monster/invader.png", __ASSET__assets_images_monster_invader_png);
 		type.set ("assets/images/monster/invader.png", AssetType.IMAGE);
@@ -4272,8 +4272,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_horse4_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_ice_demon_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_imp_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_monster_insectivorous_plant_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_insect_demon_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_monster_insectivorous_plant_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_invader_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_iron_golem_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_monster_jelly_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -4973,8 +4973,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/images/monster/horse4.png") #if display private #end class __ASSET__assets_images_monster_horse4_png extends lime.graphics.Image {}
 @:image("assets/images/monster/ice_demon.png") #if display private #end class __ASSET__assets_images_monster_ice_demon_png extends lime.graphics.Image {}
 @:image("assets/images/monster/imp.png") #if display private #end class __ASSET__assets_images_monster_imp_png extends lime.graphics.Image {}
-@:image("assets/images/monster/insectivorous_plant.png") #if display private #end class __ASSET__assets_images_monster_insectivorous_plant_png extends lime.graphics.Image {}
 @:image("assets/images/monster/insect_demon.png") #if display private #end class __ASSET__assets_images_monster_insect_demon_png extends lime.graphics.Image {}
+@:image("assets/images/monster/insectivorous_plant.png") #if display private #end class __ASSET__assets_images_monster_insectivorous_plant_png extends lime.graphics.Image {}
 @:image("assets/images/monster/invader.png") #if display private #end class __ASSET__assets_images_monster_invader_png extends lime.graphics.Image {}
 @:image("assets/images/monster/iron_golem.png") #if display private #end class __ASSET__assets_images_monster_iron_golem_png extends lime.graphics.Image {}
 @:image("assets/images/monster/jelly.png") #if display private #end class __ASSET__assets_images_monster_jelly_png extends lime.graphics.Image {}

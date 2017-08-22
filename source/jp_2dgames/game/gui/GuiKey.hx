@@ -1,8 +1,10 @@
 package jp_2dgames.game.gui;
 
+import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxSpriteButton;
 import flixel.ui.FlxVirtualPad;
+import flixel.FlxG;
 
 /**
  * ...
@@ -46,6 +48,12 @@ class GuiKey extends FlxSpriteGroup
 		bg1.buttonLeft.onUp.callback = btnLeftUp;
 		bg1.buttonRight.onUp.callback = btnRightUp;
 		bg1.buttonRight.onDown.callback = btnRightDown;
+		this.forEach(function(spr:FlxSprite){
+			spr.camera = FlxG.camera;
+		});
+		bg1.forEach(function(spr:FlxSprite){
+			spr.camera = FlxG.camera;
+		});
 	}
 
 	function btnAUp():Void{

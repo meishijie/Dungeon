@@ -1206,7 +1206,7 @@ public static var _invBG:FlxSprite;
       case MenuMode.Carry:
         // ページ数の更新
         if(isEmpty()) {
-          // アイテムを持っていない
+          // 没有装备
           _txtPage.text = UIText.getText(UIText.PAGE_NOITEM);
         }
         else {

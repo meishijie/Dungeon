@@ -128,12 +128,12 @@ class PlayState extends FlxState {
   
   //
   public static var hudCam:FlxCamera;
+  public static var uiCam:FlxCamera;
   /**
 	 * 生成
 	 */
   override public function create():Void {
     super.create();
-	
 	
     if(Global.isLoadGame()) {
       // セーブデータをロード
@@ -341,7 +341,7 @@ class PlayState extends FlxState {
 	// ui提示信息
     UIText.instance = new UIText(_csv.uitext);
 
-    // ステータス表示
+    // 状态显示
     _guistatus = new GuiStatus();
     this.add(_guistatus);
 	
@@ -403,7 +403,7 @@ class PlayState extends FlxState {
       this.add(ParticleKira.parent);
     }
 
-    // ショップ購入メニュー生成
+    //商店购买菜单生成
     GuiBuyDetail.create(640/2 - GuiBuyDetail.BG_WIDTH/2 - 80, FlxG.height/2 - GuiBuyDetail.BG_HEIGHT/2);
 
     if(Global.isLoadGame() == false) {
@@ -415,12 +415,12 @@ class PlayState extends FlxState {
 	//拾取物品描述信息
     //this.add(message);
 
-    // インベントリ
+    // 物品生成
     var inventory = new Inventory();
     this.add(inventory);
 	//物品镜头
     hudCam = new FlxCamera(100, 50, 500, 300);
-		hudCam.zoom = 1; // For 1/2 zoom out.
+		hudCam.zoom = 1.5; // For 1/2 zoom out.
 		hudCam.follow(Inventory._invBG);
 		hudCam.targetOffset.y = 100;
 		hudCam.alpha = 0;
@@ -429,9 +429,12 @@ class PlayState extends FlxState {
     
     Inventory.instance = inventory;
     inventory.setGuiStatus(_guistatus);
+	inventory.camera = hudCam;
     // アイテムデータ設定
     Global.setItemList();
-
+	
+	
+	
     // シーケンス管理
     _seq = new SeqMgr(this, _csv);
 

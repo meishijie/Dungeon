@@ -17,7 +17,7 @@ import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 import flixel.FlxBasic;
 /**
- * ステータス表示
+ * 主角信息生命等显示
  **/
 class GuiStatus extends FlxGroup {
 
@@ -198,11 +198,14 @@ class GuiStatus extends FlxGroup {
 
     // ヘルプテキスト設定
     changeHelp(HELP_KEYINPUT);
-	_group.forEach(function(spr:FlxSprite)
-         {
-             spr.scrollFactor.set(0, 0);
-         });
-	}
+	
+	_group.forEach(function(spr:FlxSprite){
+		spr.scrollFactor.set(0, 0);
+		spr.camera = FlxG.camera;
+	});
+	
+}
+	
 
   /**
 	 * 更新
@@ -257,15 +260,15 @@ override public function update(elapsed:Float):Void
     }
     _prevMoney = moneyadd;
 
-    // スコア
+    // 分数
     var score = Global.getScore();
     _txtScore.text = '${score}pt';
 
-    // 表示アニメーション
+    // 显示动画
     _groupOfsY *= 0.8;
     _group.y = _groupOfsY + MERGIN_Y;
 
-    // ヘルプテキストのアニメーション
+    // 感谢文本的动画
     {
       if(_helpOfsY > 0) {
         _helpOfsY *= 0.9;
@@ -311,6 +314,7 @@ override public function update(elapsed:Float):Void
 
   /**
    * 敵の情報を表示するかどうかチェックする
+   * 敌人的情报显示是否检查
    **/
   public function checkEnemyInfo() {
     var player = cast(FlxG.state, PlayState).player;
@@ -335,6 +339,7 @@ override public function update(elapsed:Float):Void
 
   /**
    * ヘルプの表示を変更する
+   * 帮助变更的标识
    **/
   public function changeHelp(mode:Int) {
     if(_helpMode == mode) {

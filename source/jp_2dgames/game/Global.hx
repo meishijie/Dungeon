@@ -20,11 +20,11 @@ import jp_2dgames.lib.TextUtil;
  **/
 class Global {
 
-  // ゲーム開始フロア数
+  // ゲーム開始フロア数 游戏开始楼层号码
   public static inline var FLOOR_FIRST:Int = 1;
-  // 特殊マップ開始番号
+  // 特殊マップ開始番号特别地图起始编号
   public static inline var MAP_ID_EXTRA_FIRST:Int = 500;
-  // ゲーム開始時の所持金
+  // ゲーム開始時の所持金 在游戏开始时拥有
   private static inline var MONEY_FIRST:Int = 300;
   // ショップ出現開始フロア数
   private static inline var SHOP_APPEAR_FIRST:Int = 3;

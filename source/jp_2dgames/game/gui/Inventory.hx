@@ -22,7 +22,7 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
-
+import jp_2dgames.game.gui.GuiKey;
 /**
  * 状態
  **/
@@ -46,10 +46,10 @@ class Inventory extends FlxGroup {
 
   // ■戻り値
   public static inline var RET_CONTINUE:Int = 0; // 処理続行中
-  public static inline var RET_CANCEL:Int   = 1; // インベントリをキャンセルして閉じた
-  public static inline var RET_DECIDE:Int   = 2; // 項目を決定した
+  public static inline var RET_CANCEL:Int   = 1; // インベントリをキャンセルして閉じた 取消库存并关闭
+  public static inline var RET_DECIDE:Int   = 2; // 項目を決定した 决定了一个项目
   public static inline var RET_THROW:Int    = 3; // アイテムを投げた
-  public static inline var RET_SCROLL:Int   = 4; // 巻物を読んだ
+  public static inline var RET_SCROLL:Int   = 4; // 巻物を読んだ 我读了一个卷轴。
 
   // 起動モード
   public static inline var EXECMODE_NORMAL:Int = 0; // 通常起動
@@ -553,6 +553,20 @@ public static var _invBG:FlxSprite;
     _setDispPageArrow(false);
     this.add(_arrowL);
     this.add(_arrowR);
+    //打开和关闭菜单按钮 
+    GuiKey.bg1.buttonB.onDown.callback = function(){
+        ca++;
+        trace("ca: "+ca);  
+        if(isEmpty() ){
+            if(PlayState.hudCam.alpha != 0) {
+              // メニューを閉じる 关闭菜单
+              PlayState.hudCam.alpha = 0;
+            }else{
+              PlayState.hudCam.alpha = 0.5;
+            }
+        }    
+      }
+      //
   }
 
   /**
@@ -927,14 +941,32 @@ public static var _invBG:FlxSprite;
     }
   }
 
+
+  
   /**
    * 更新
    **/
+  private var ca = 1;
   override public function update(elapsed:Float):Void
   {
+    
     super.update(elapsed);
-
     if(_state == State.Main) {
+      //在普通状态切换显示物品栏 GuiKey.bg1.buttonC.justReleased
+      //if(GuiKey.bg1.buttonB.justReleased) {
+        // ca++;
+        // trace("ca: "+ca);  
+        // if(isEmpty()){
+        //     if(PlayState.hudCam.alpha != 0) {
+        //       // メニューを閉じる 关闭菜单
+        //       PlayState.hudCam.alpha = 0;
+        //     }else{
+        //       PlayState.hudCam.alpha = 0.5;
+        //     }
+        // }      
+           
+     // }
+      
       // 通常
       _tCursor += 4;
       _cursor.alpha = 0.3 + 0.1 * Math.sin(_tCursor * FlxAngle.TO_RAD);
@@ -982,8 +1014,8 @@ public static var _invBG:FlxSprite;
         }
 
         if(Key.press.B) {
-          // メニューを閉じる
-		  PlayState.hudCam.alpha = 0;
+          // メニューを閉じる 关闭菜单
+		      PlayState.hudCam.alpha = 0;
           _cursor.visible = false;
           return RET_CANCEL;
         }
@@ -995,31 +1027,31 @@ public static var _invBG:FlxSprite;
         if(Key.press.A) {
           switch(_execMode) {
             case EXECMODE_NORMAL:
-              // 通常モード
-              // コマンドメニューを開く
+              // 通常モード正常模式
+              // コマンドメニューを開く打开命令菜单
               var param = _getMenuParam();
               var itemid = getSelectedItem();
               _cmd = new InventoryCommand(CMD_X, CMD_Y, _cbAction, param);
               this.add(_cmd);
               _state = State.Command;
 
-              // ヘルプ変更
+              // ヘルプ変更 帮助改变
               _guistatus.changeHelp(GuiStatus.HELP_INVENTORYCOMMAND);
 
             case EXECMODE_SELL:
-              // 売却モードはそのまま売る
+              // 売却モードはそのまま売る卖出销售模式
               // お金を獲得
               var item = getSelectedItem();
               // 売却金額を取得
               var money = ItemUtil.getSell(item);
               Global.addMoney(money);
-              // 売却メッセージ表示
+              // 売却メッセージ表示 卖消息显示
               Message.push2(Msg.SHOP_SELL, [ItemUtil.getName(item), money]);
               Snd.playSe("coin", true);
-              // アイテムを消す
+              // アイテムを消す 擦除项目
               delItem(-1);
               if(isEmpty()) {
-                // アイテムがなくなったらメニューを閉じる
+                // アイテムがなくなったらメニューを閉じる 当没有更多的项目时关闭菜单
                 return RET_CANCEL;
               }
               else {
@@ -1032,7 +1064,7 @@ public static var _invBG:FlxSprite;
         }
 
       case State.Command:
-        // コマンドメニュー
+        // コマンドメニュー 命令菜单
         if(_cmd.proc() == false) {
           // 項目決定
           // メインに戻る
@@ -1040,7 +1072,7 @@ public static var _invBG:FlxSprite;
           _cmd = null;
           _state = State.Main;
 
-          // 項目を決定した
+          // 項目を決定した 我决定了一个项目
           switch(_actionType) {
             case MENU_THROW:
               // アイテムを投げた
@@ -1060,7 +1092,7 @@ public static var _invBG:FlxSprite;
           }
         }
         else if(Key.press.B) {
-          // メインに戻る
+          // メインに戻る 返回主页
           this.remove(_cmd);
           _cmd = null;
           _state = State.Main;
@@ -1200,7 +1232,7 @@ public static var _invBG:FlxSprite;
     _cursor.y = POS_Y + LIST_POS_Y + (idx * DY);
   }
 
-  // ページ切り替え
+  // ページ切り替え 页面切换
   private function _changePage():Void {
     switch(_menumode) {
       case MenuMode.Carry:
@@ -1208,6 +1240,7 @@ public static var _invBG:FlxSprite;
         if(isEmpty()) {
           // 没有装备
           _txtPage.text = UIText.getText(UIText.PAGE_NOITEM);
+          
         }
         else {
           _txtPage.text = 'Page (${_nPage+1}/${_pageMax})';
@@ -1234,7 +1267,7 @@ public static var _invBG:FlxSprite;
    **/
   private function _adjustCursor():Void {
     if(_nCursor >= itemcount) {
-      // 範囲外のカーソルの位置をずらす
+      // 範囲外のカーソルの位置をずらす 将光标移到范围之外
       _nCursor = itemcount - 1;
       if(_nCursor < 0) {
         _nCursor = 0;
@@ -1280,10 +1313,10 @@ public static var _invBG:FlxSprite;
    **/
   public function delItem(idx:Int, bMsg:Bool = false, bAdjustCursor=true):Bool {
     if(idx == -1) {
-      // 現在のカーソルを使う
+      // 現在のカーソルを使う 使用当前光标
       idx = _nCursor;
     }
-    // 削除アイテムの番号を保持しておく
+    // 削除アイテムの番号を保持しておく保留已删除项目的数量
     var item = itemList[idx];
     var itemid = item.id;
     if(item.isEquip) {
@@ -1291,11 +1324,11 @@ public static var _invBG:FlxSprite;
       unequip(item.type, false);
     }
 
-    // アイテムリストから削除する
+    // アイテムリストから削除する 从项目列表中删除
     itemList.splice(idx, 1);
 
     if(bAdjustCursor) {
-      // カーソル位置の調整
+      // カーソル位置の調整 调整光标位置
       _adjustCursor();
     }
 

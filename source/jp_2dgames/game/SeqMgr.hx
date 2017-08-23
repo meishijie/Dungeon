@@ -282,7 +282,7 @@ class SeqMgr {
             // インベントリを開く
             if(_inventory.checkOpen()) {
               // 開ける
-			  PlayState.hudCam.alpha = 0.5;
+			        PlayState.hudCam.alpha = 0.5;
               _inventory.setActive(true);
               _change(State.InventoryInput);
             }
@@ -329,6 +329,7 @@ class SeqMgr {
             _player.changeprev();
             // 非表示
             _inventory.setActive(false);
+            
             _change(State.KeyInput);
           case Inventory.RET_DECIDE:
             // ターン終了

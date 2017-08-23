@@ -83,18 +83,18 @@ class PlayState extends FlxState {
     return _lField;
   }
 
-  // シーケンス管理
+  // シーケンス管理 序列管理
   private var _seq:SeqMgr;
 
   // 状態
   private var _state:State;
 
-  // 汎用タイマー
+  // 汎用タイマー 通用定时器
   private var _timer:Int;
 
   // 背景
   private var _back:FlxSprite;
-  // 背景エフェクト
+  // 背景エフェクト 背景效果
   //private var _wave:FlxWaveSprite = null;
 
   // フロア開始演出用テキスト
@@ -105,22 +105,22 @@ class PlayState extends FlxState {
   // CSVデータ
   private var _csv:Csv;
 
-  // ステータス
+  // ステータス 状态
   private var _guistatus:GuiStatus;
   public var guistatus(get, never):GuiStatus;
   public function get_guistatus() {
     return _guistatus;
   }
 
-  // ターン数
+  // ターン数 回合数
   private var _turn:Int = 0;
 
-  // 階段エフェクトタイマー
+  // 階段エフェクトタイマー 楼梯效果计时器
   private var _tStair:Int = 0;
 
-  // デバッグ用アイテム
+  // デバッグ用アイテム 调试物品
   private var _debugItem:DropItem;
-  // デバッグ用敵
+  // デバッグ用敵 敌人调试
   private var _debugEnemy:Enemy;
 
   //屏幕按键

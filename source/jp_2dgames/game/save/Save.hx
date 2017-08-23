@@ -27,12 +27,12 @@ import haxe.Json;
  * ロード種別
  **/
 enum LoadType {
-  All;  // すべてロードする
-  Glob; // グローバルデータのみ
+  All;  // すべてロードする 加载全部
+  Glob; // グローバルデータのみ 全球数据
 }
 
 /**
- * グローバルデータ
+ * グローバルデータ 全球资料
  **/
 private class _Global {
   public var score:Int            = 0;

@@ -12,7 +12,7 @@ import flixel.FlxG;
  */
 class GuiKey extends FlxSpriteGroup
 {
-	private var bg:FlxSpriteButton ;
+	//private var bg:FlxSpriteButton ;
 	public static var bg1:FlxVirtualPad;
 	public static var aUp:Bool = false;
 	public static var bUp:Bool = false;

@@ -1467,7 +1467,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "135",
+			build: "138",
 			company: "HaxeFlixel",
 			file: "RogueLike",
 			fps: 60,

@@ -29,7 +29,7 @@ class GuiKey extends FlxSpriteGroup
 		/*bg = new FlxSpriteButton(0, 0, null, null);
 		bg.loadGraphic("assets/images/pad/background.png");
 		add(bg);*/
-		bg1 = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.A_B_C);
+		bg1 = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.A_B);
 		add(bg1);
 		bg1.scrollFactor.set(0,0);
 		bg1.y -= 50;
@@ -37,9 +37,7 @@ class GuiKey extends FlxSpriteGroup
 		bg1.buttonB.onUp.callback = btnBUp;
 		bg1.buttonA.onDown.callback = btnADown;
 		bg1.buttonB.onDown.callback = btnBDown;
-		bg1.buttonC.onUp.callback = btnCUp;
-		bg1.buttonC.onDown.callback = btnCDown;
-		
+				
 		bg1.buttonUp.onUp.callback = btnUpUp;
 		bg1.buttonUp.onDown.callback = btnUpDown;
 		bg1.buttonDown.onUp.callback = btnDownUp;
@@ -75,15 +73,7 @@ class GuiKey extends FlxSpriteGroup
 		
 
 	}
-	function btnCUp():Void{
-		cUp = false;
-
-	}
 	
-	function btnCDown():Void{
-		cUp = true;
-
-	}
 	function btnUpUp():Void{
 		upUp = false;
 

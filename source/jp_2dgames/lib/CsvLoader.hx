@@ -115,8 +115,8 @@ class CsvLoader {
   }
 
   /**
-   * 特定のキーに対応する値を持つ値を取得する
-   * @return 見つからなかったらエラー
+   * 特定のキーに対応する値を持つ値を取得する 取得特定的关键值的值
+   * @return 見つからなかったらエラー 如果没有找到错误
    **/
   public function searchItem(key:String, name:String, item:String, bExcept=true):String {
     for(data in _datas) {
@@ -178,7 +178,7 @@ class CsvLoader {
   }
 
   /**
-   * 値を数値として取得する
+   * 値を数値として取得する 以值为数值取得
    * @param id id
    * @param key キー文字列
    * @return 値

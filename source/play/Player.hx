@@ -2,6 +2,8 @@ package play;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.input.FlxPointer;
+import flixel.math.FlxPoint;
 
 class Player extends FlxSprite
 {
@@ -9,9 +11,10 @@ class Player extends FlxSprite
 	
 	public function new(x:Float, y:Float) 
 	{
-		super(x, y, "assets/images/player.png");
+		super(x, y);
+		loadGraphic("assets/images/player.png", true, 32, 32);
 		pixelPerfectRender = false;
-		
+		scale = new FlxPoint(0.5, 0.5);
 		// let's decrease the hitbox size so it's less 
 		// frustrating to move through the narrow hallways
 		setSize(12, 12);

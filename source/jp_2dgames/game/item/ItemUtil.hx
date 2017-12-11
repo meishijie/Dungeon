@@ -210,7 +210,7 @@ class ItemUtil {
   }
 
   /**
-	 * アイテムIDからアイテム種別を求める
+	 * アイテムIDからアイテム種別を求める 从项目ID寻求一种类型
 	 **/
   public static function getType(id:Int):IType {
     var csv = getCsv(id);
@@ -223,7 +223,7 @@ class ItemUtil {
   }
 
   /**
-	 * 指定のパラメータ名に対応するパラメータを取得する
+	 * 指定のパラメータ名に対応するパラメータを取得する 取得指定的参数名称的参数
 	 **/
   public static function getParam(id:Int, key:String):Int {
     var csv = getCsv(id);
@@ -282,7 +282,7 @@ class ItemUtil {
     }
   }
 
-  // 装備アイテムかどうか
+  // 装備アイテムかどうか 是否装备装备
 
   public static function isEquip(id:Int):Bool {
     if(id < ID_OFFSET) {
@@ -293,13 +293,13 @@ class ItemUtil {
     }
   }
 
-  // 消費アイテムかどうか
+  // 消費アイテムかどうか 是否是消费品
   public static function isConsumable(id:Int):Bool {
     // 装備アイテムでなければ消費アイテム
     return !isEquip(id);
   }
 
-  // ランダムでアイテムを取得する
+  // ランダムでアイテムを取得する 随机获得项目
   public static function random(type:IType):Int {
     switch(type) {
       case IType.Weapon, IType.Armor, IType.Ring, IType.Food, IType.Potion, IType.Scroll, IType.Wand, IType.Orb:
@@ -314,7 +314,7 @@ class ItemUtil {
     }
   }
 
-  // ランダムでアイテム種別を取得する
+  // ランダムでアイテム種別を取得する 随机取得项目类别
   public static function randomType():IType {
     var tbl = [
       IType.Weapon,
@@ -329,7 +329,7 @@ class ItemUtil {
     return tbl[FlxG.random.int(0, tbl.length-1)];
   }
 
-  // デバッグ用のアイテム種別を取得する
+  // デバッグ用のアイテム種別を取得する 取得Debug的项目类别
   public static function getDebugItemType():IType {
     if(FlxG.keys.pressed.U) {
       return IType.Weapon;
@@ -359,16 +359,16 @@ class ItemUtil {
       return IType.Orb;
     }
 
-    // 該当するキーを押していない
+    // 該当するキーを押していない 不按相应的键
     return IType.None;
   }
 
   /**
-   * 青オーブを使用できるかどうか
+   * 青オーブを使用できるかどうか 青色orb能否使用
    **/
   public static function canUseBlueOrb():Bool {
     if(Global.getFloor() >= 30) {
-      // 30F以降は使えない
+      // 30F以降は使えない 30F以后不能使用
       return false;
     }
 
@@ -377,10 +377,10 @@ class ItemUtil {
   }
 
   /**
-   * 消費アイテムを使用する
+   * 消費アイテムを使用する 消费品的使用
    **/
   public static function use(actor:Actor, item:ItemData, bMsg=true):Void {
-    // 拡張パラメータ
+    // 拡張パラメータ 扩展参数
     var extra = ItemUtil.getParamString(item.id, "extra");
     var extval = ItemUtil.getParam(item.id, "extval");
 
@@ -698,7 +698,7 @@ class ItemUtil {
   }
 
   /**
-   * 指定のカテゴリのアンロック対象のアイテムリストを取得する
+   * 指定のカテゴリのアンロック対象のアイテムリストを取得する 指定的类别的解锁对象的道具列表取得
    **/
   public static function getCategoryUnlockList(type:IType):Array<Int> {
     var list = new Array<Int>();

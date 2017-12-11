@@ -141,7 +141,7 @@ class Actor extends FlxSprite {
   private function get_params() {
     return _params;
   }
-  // 拡張パラメータ
+  // 拡張パラメータ 延伸参数
   public var extParams(get, never):Params;
   private function get_extParams() {
     return _extParams;

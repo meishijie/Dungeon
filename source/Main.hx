@@ -1,6 +1,7 @@
 package;
 
 import jp_2dgames.game.state.BootState;
+import generate.GenerateState;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;

@@ -15,11 +15,12 @@ class PlayState extends FlxState
 	
 	var map:FlxTilemap;
 	var player:Player;
-	
+	var _time = Date.now().getTime();
 	override public function create():Void
 	{
 		map = new FlxTilemap();
 		var csvData:String = FlxStringUtil.bitmapToCSV(GenerateState.mapData);
+		
 		map.loadMapFromCSV(csvData, "assets/images/tiles.png", TILE_SIZE, TILE_SIZE, AUTO);
 		add(map);
 		
@@ -40,6 +41,9 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, map);
+		
+		//解析经过时间
+		trace(DateTools.parse(Date.now().getTime() - _time));
 		
 		if (FlxG.keys.justReleased.SPACE)
 		{

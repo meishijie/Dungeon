@@ -5,17 +5,17 @@ package jp_2dgames.game.actor;
  **/
 class Params {
   public var id:Int      = 1; // ID
-  public var lv:Int      = 1; // レベル
-  public var exp:Int     = 0; // 経験値
-  public var xp:Int      = 0; // 倒したときに得られる経験値
+  public var lv:Int      = 1; // レベル 等级
+  public var exp:Int     = 0; // 経験値 
+  public var xp:Int      = 0; // 倒したときに得られる経験値 放倒的经验值
   public var hp:Int      = 0; // 現在のHP
   public var hpmax:Int   = 0; // 最大HP
   public var str:Int     = 0; // 力
   public var vit:Int     = 0; // 体力
   public var food:Int    = 10000; // 満腹度(x100)
   public var foodmax:Int = 10000; // 最大満腹度(x100)
-  public var badstatus:String = "none"; // バッドステータス
-  public var badstatus_turn:Int = 0; // バッドステータスが有効なターン数
+  public var badstatus:String = "none"; // バッドステータス 不利状态
+  public var badstatus_turn:Int = 0; // バッドステータスが有効なターン数 BAD状态有效的回合数
 
   public function new() {
   }
@@ -36,7 +36,7 @@ class Params {
 }
 
 /**
- * キャラクターステータスユーティリティ
+ * キャラクターステータスユーティリティ 角色状态实用程序
  **/
 class ParamsUtil {
 

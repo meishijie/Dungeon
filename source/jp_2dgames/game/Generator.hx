@@ -156,7 +156,7 @@ class Generator {
   }
 
   /**
-   * フィールド情報からアイテムや敵を自動配置
+   * フィールド情報からアイテムや敵を自動配置 从场上信息和敌人自动配置
    **/
   public static function exec(csv:Csv, layer:Layer2D):Void {
     var gEnemy = new GenerateInfo(csv, GenerateInfo.TYPE_ENEMY);

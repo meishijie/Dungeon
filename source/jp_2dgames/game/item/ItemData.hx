@@ -3,7 +3,7 @@ package jp_2dgames.game.item;
 import jp_2dgames.game.item.ItemUtil.IType;
 
 /**
- * アイテム拡張パラメータ
+ * アイテム拡張パラメータ 物品扩展参数
  **/
 class ItemExtraParam {
   public var value:Int = 0;
@@ -13,7 +13,7 @@ class ItemExtraParam {
   }
 
   /**
-   * 拡張パラメータをコピー
+   * 拡張パラメータをコピー 复制参数
    **/
   public static function copy(dst:ItemExtraParam, src:ItemExtraParam):Void {
     if(src == null) {
@@ -32,7 +32,7 @@ class ItemExtraParam {
 }
 
 /**
- * アイテムデータ
+ * アイテムデータ 物品数据
  **/
 class ItemData {
   public var id(default, default):Int; // アイテムID

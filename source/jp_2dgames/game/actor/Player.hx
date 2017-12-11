@@ -203,11 +203,11 @@ class Player extends Actor {
     }
     super.init(X, Y, dir, params, bCreate);
 
-    // プレイヤーはID「0」にしておく
+    // プレイヤーはID「0」にしておく 玩家的ID“0”
     _id = 0;
   }
 
-  // アニメーション名を取得する
+  // アニメーション名を取得する 取得动画名
   private function getAnimName(bStop:Bool, dir:Dir):String {
     var pre = bStop ? "stop" : "walk";
     var suf = DirUtil.toString(dir);
@@ -215,7 +215,7 @@ class Player extends Actor {
     return pre + "-" + suf;
   }
 
-  // アニメーションを再生
+  // アニメーションを再生 改变动画
   private function changeAnim():Void {
     var name = getAnimName(_bStop, _dir);
     animation.play(name);
@@ -224,41 +224,41 @@ class Player extends Actor {
   override public function addExp(v:Int):Void {
     super.addExp(v);
     if(params.lv >= 99) {
-      // レベル99で打ち止め
+      // レベル99で打ち止め 最高等级99 不能升级
       return;
     }
 
     var bLevelUp = false;
     var nextExp = _csv.getInt(params.lv+1, "exp");
-    while(params.exp >= nextExp) {
-      // レベルアップ
+    while(params.exp >= nextExp) {// 超过时升级
+      // レベルアップ	升级
       params.lv++;
       // 演出開始
       {
         ParticleMessage.start(x, y, "LEVEL UP");
         Snd.playSe("levelup", true);
       }
-      // パラメータ上昇
+      // パラメータ上昇 参数上升
       _levelup();
       bLevelUp = true;
       if(params.lv >= 99) {
-        // レベル99で打ち止め
+        // レベル99で打ち止め 最高等级99 不能升级
         break;
       }
       nextExp = _csv.getInt(params.lv+1, "exp");
     }
 
     if(bLevelUp) {
-      // レベルアップメッセージの表示
+      // レベルアップメッセージの表示 升级信息展示
       Message.push2(Msg.LEVELUP, [name]);
       Message.push2(Msg.LEVELUP2, [name, params.lv]);
 
-      // HPを最大まで回復
+      // HPを最大まで回復 回复hp
       var val = params.hpmax - params.hp;
       addHp(val);
       Message.push2(Msg.RECOVER_HPMAX, [name]);
 
-      // 最大レベル数更新
+      // 最大レベル数更新 最大等级更新
       if(GameData.getPlayData().maxLv < params.lv) {
         GameData.getPlayData().maxLv = params.lv;
         GameData.save();
@@ -267,10 +267,10 @@ class Player extends Actor {
   }
 
   /**
-   * レベルアップによるパラメータ上昇
+   * レベルアップによるパラメータ上昇 根据升级的参数上升
    **/
   private function _levelup():Void {
-    // 最大HPを更新
+    // 最大HPを更新 最大hp更新 攻击力更新  体力更新
     params.hpmax += _csv.getInt(params.lv, "hp");
     params.str += _csv.getInt(params.lv, "str");
     params.vit += _csv.getInt(params.lv, "vit");
@@ -281,13 +281,13 @@ class Player extends Actor {
    **/
   override public function beginAction():Void {
     if(_state == Actor.State.ActBegin) {
-      // 攻撃アニメーション開始
+      // 攻撃アニメーション開始 攻击动画开始
       var x1:Float = x;
       var y1:Float = y;
       var x2:Float = Field.toWorldX(_xtarget);
       var y2:Float = Field.toWorldY(_ytarget);
 
-      // 攻撃終了の処理
+      // 攻撃終了の処理 攻击结束的处理
       var cbEnd = function(tween:FlxTween) {
         _change(Actor.State.TurnEnd);
       }
@@ -310,13 +310,13 @@ class Player extends Actor {
             }
           }
           else if(Field.isBlock(tx, ty)) {
-            // ブロックが壊せる
+            // ブロックが壊せる 块破坏
             Field.breakWall(tx, ty);
           }
         }
         else {
           if(Calc.checkHitAttack(_target)) {
-            // 攻撃が当たった
+            // 攻撃が当たった 攻击中了
             var val = Calc.damage(this, _target, Inventory.getWeaponData(), null);
             if(_target.damage(val)) {
               // 敵を倒した
@@ -325,14 +325,14 @@ class Player extends Actor {
             else {
               switch(_target.getExtra()) {
                 case "reflect":
-                  // 敵のダメージ反射
+                  // 敵のダメージ反射 敌人的伤害反射
                   CauseOfDeathMgr.set(DeathType.ReflectAtk, _target.id);
                   damage(val);
               }
             }
           }
           else {
-            // 攻撃を外した
+            // 攻撃を外した 挡住攻击
             Snd.playSe("avoid");
             Message.push2(Msg.MISS, [_target.name]);
           }
@@ -340,7 +340,7 @@ class Player extends Actor {
         FlxTween.tween(this, {x:x1, y:y1}, 0.1, {ease:FlxEase.expoOut, onComplete:cbEnd});
       }
 
-      // アニメーション開始
+      // アニメーション開始 动画开始
       FlxTween.tween(this, {x:x2, y:y2}, 0.1, {ease:FlxEase.expoIn, onComplete:cbStart});
     }
     super.beginAction();
@@ -546,7 +546,7 @@ class Player extends Actor {
 override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-    _tElapsed += FlxG.elapsed;
+		_tElapsed += FlxG.elapsed;
   }
 
   /**

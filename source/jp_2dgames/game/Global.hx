@@ -20,17 +20,17 @@ import jp_2dgames.lib.TextUtil;
  **/
 class Global {
 
-  // ゲーム開始フロア数 游戏开始楼层号码
+  // ゲーム開始フロア数  游戏开始楼层号码
   public static inline var FLOOR_FIRST:Int = 1;
-  // 特殊マップ開始番号特别地图起始编号
+  // 特殊マップ開始番号  特别地图起始编号
   public static inline var MAP_ID_EXTRA_FIRST:Int = 500;
-  // ゲーム開始時の所持金 在游戏开始时拥有
+  // ゲーム開始時の所持金 在游戏开始时拥有钱
   private static inline var MONEY_FIRST:Int = 300;
-  // ショップ出現開始フロア数
+  // ショップ出現開始フロア数 商店出现开始楼层
   private static inline var SHOP_APPEAR_FIRST:Int = 3;
-  // フラグの最大数
+  // フラグの最大数 标记最大数
   public static inline var BIT_MAX:Int = 32;
-  // フロアの最大数
+  // フロアの最大数 楼层最大数
   public static inline var FLOOR_MAX:Int = 30;
 
   /**
@@ -60,7 +60,7 @@ class Global {
     CauseOfDeathMgr.init();
   }
 
-  // セーブデータをロードしてゲームを開始する
+  // セーブデータをロードしてゲームを開始する 把数据保存在卢德游戏开始
   private static var _bLoadGame:Bool = false;
   public static function SetLoadGame(b:Bool):Void {
     _bLoadGame = b;
@@ -69,7 +69,7 @@ class Global {
     return _bLoadGame;
   }
 
-  // スコア
+  // 分数
   private static var _score:Int = 0;
   public static function getScore():Int {
     return _score;
@@ -81,7 +81,7 @@ class Global {
     _score += v;
   }
 
-  // プレイ時間
+  // 游戏时间
   private static var _playtime:Float = 0;
   public static function getPlayTime():Float {
     return _playtime;
@@ -93,11 +93,11 @@ class Global {
     _playtime += add_sec;
   }
 
-  // フロア数
+  // 楼面数
   private static var _floor:Int = 1;
 
   /**
-   * フロア数の取得
+   * 楼层数的取得
    **/
   public static function getFloor():Int {
     return _floor;
@@ -107,7 +107,7 @@ class Global {
   }
 
   /**
-   * 参照しているマップの番号
+   * 参照地图的号码
    **/
   private static var _mapid:Int = 0;
   public static function getMapID():Int {
@@ -116,18 +116,18 @@ class Global {
   public static function setMapID(v:Int):Void {
     _mapid = v;
   }
-  // 現在のマップが特殊フロアかどうか
+  // 现在的地图是否有特殊的楼层
   public static function isMapExtra():Bool {
     return _mapid >= MAP_ID_EXTRA_FIRST;
   }
 
   /**
-   * 現在のフロアのマップデータのパスを取得する
+   * 现在的楼层的地图数据的 
    **/
   public static function getFloorMap():String {
     _mapid = _floor;
     if(_nightmareDefeat) {
-      // ナイトメアを倒している
+      // ナイトメアを倒している 放倒的人
       _mapid = 500;
     }
     var map = TextUtil.fillZero(_mapid, 3);
@@ -135,28 +135,28 @@ class Global {
   }
 
   /**
-	 * 次のフロアに進む
+	 * 次のフロアに進む 下一个楼层
 	 **/
   public static function nextFloor():Void {
     _floor++;
-    // TODO: 最後まで進んだら最初に戻る
+    // TODO: 最後まで進んだら最初に戻る 最后前进后最先回到最初
     var map = TextUtil.fillZero(_floor, 3);
     var path = 'assets/levels/${map}.tmx';
     if(Assets.exists(path, TEXT) == false) {
       _floor = 1;
     }
-
-    // 到達最大フロア数を更新
+ 
+    // 到達最大フロア数を更新 最大的楼层更新
     if(GameData.getPlayData().maxFloor < _floor) {
       GameData.getPlayData().maxFloor = _floor;
     }
 
-    // 所持金増加演出終わり
+    // 所持金増加演出終わり 所持的钱增加演出结束
     _moneyadd = 0;
   }
 
   /**
-   * 1つ前のフロアに戻る
+   * 1つ前のフロアに戻る 回到一个前的楼层
    **/
   public static function backFloor():Void {
     _floor--;
@@ -183,13 +183,13 @@ class Global {
     _money += v;
     _moneyadd = v;
 
-    // 所持金アンロックのチェック
+    // 所持金アンロックのチェック 所持金解锁的检查
     UnlockMgr.check("money", _money);
 
-    // トータル金額に加算
+    // トータル金額に加算 金额加
     GameData.getPlayData().totalMoney += v;
 
-    // 最大所持金チェック
+    // 最大所持金チェック 最大携带金币检测
     if(GameData.getPlayData().maxMoney < _money) {
       GameData.getPlayData().maxMoney = _money;
       GameData.save();
@@ -212,23 +212,23 @@ class Global {
     _moneyadd = 0;
   }
 
-  // アイテムデータ
+  // アイテムデータ 物品数据
   private static var _items:Array<ItemData> = new Array<ItemData>();
   /**
-	 * アイテムデータを設定する
+	 * アイテムデータを設定する 设定物品数据
 	 **/
   public static function setItemList(items:Array<ItemData>=null):Void {
     if(items == null) {
-      // グローバルデータにあるアイテムデータを使う
+      // グローバルデータにあるアイテムデータを使う 使用全局数据的条款数据
       items = _items;
       if(_items.length == 0 && getFloor() == 1) {
-        // りんごを持たせる
+        // りんごを持たせる 携带苹果
         var param = new ItemExtraParam();
         items.push(new ItemData(ItemConst.FOOD1, param));
       }
     }
     else {
-      // 外部のデータを使う
+      // 外部のデータを使う 使用外部的数据
       _items = items;
     }
     Inventory.setItemList(items, _nCursorInventory, _itemMaxInventory);
@@ -255,7 +255,7 @@ class Global {
     _nCursorInventory = v;
   }
 
-  // インベントリに格納可能な最大アイテム数
+  // インベントリに格納可能な最大アイテム数 存货可保存的最大项目数
   private static var _itemMaxInventory:Int = Inventory.ITEM_MAX_FIRST;
   public static function getItemMaxInventory():Int {
     return _itemMaxInventory;
@@ -271,17 +271,17 @@ class Global {
     return ret;
   }
 
-  // プレイヤーのデータを初期化するかどうか
+  // プレイヤーのデータを初期化するかどうか 是否初始化游戏的数据
   private static var _bInitPlayer = true;
-  // プレイヤーステータス
+  // プレイヤーステータス 球员状态
   private static var _params:Params = new Params();
   public static function initPlayer(player:Player, x:Int, y:Int, dir:Dir, params:Params = null):Void {
     if(params == null) {
-      // グローバルデータにあるパラメータを使う
+      // グローバルデータにあるパラメータを使う 使用全局数据的参数
       params = _params;
     }
     else {
-      // 外部のデータを使う
+      // 外部のデータを使う 使用外部的数据
       _params = params;
     }
 
@@ -375,7 +375,7 @@ class Global {
     _shopAppearCount = 0;
   }
 
-  // ビットフラグ
+  // ビットフラグ 位标记
   private static var _bits:Array<Bool> = null;
   private static function _bitsInit():Void {
     _bits = [for(i in 0...BIT_MAX) false];
@@ -411,7 +411,7 @@ class Global {
     return _bits[idx];
   }
 
-  // ゲームクリアフラグ
+  // ゲームクリアフラグ 游戏开始标记
   private static var _bGameClear = false;
   public static function gameClear():Void {
     _bGameClear = true;

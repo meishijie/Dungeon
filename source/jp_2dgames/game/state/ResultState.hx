@@ -280,15 +280,15 @@ override public function create():Void
       case State.Wait:
         // ちょっと待つ
       case State.Main:
-
-        // キラキラエフェクト出現
+		trace('当前是state.main');
+        // キラキラエフェクト出現 闪闪发光效果出现
         if(FlxG.random.bool(10)) {
           var px = FlxG.random.float(FlxG.width/2, FlxG.width/2+256);
           var py = FlxG.random.float(FlxG.height/3, FlxG.height/3+128);
           Kira.start(px, py);
         }
 
-        // 目ぱち更新
+        // 目ぱち更新 第一瞬间更新
         _tEye += FlxG.random.int(1, 5);
         _eye.visible = false;
         _eye2.visible = false;
@@ -302,7 +302,7 @@ override public function create():Void
           _eye.visible = true;
         }
 
-        if(Key.press.A) {
+        if(FlxG.mouse.justReleased) {
           // フェードアウト開始
           Snd.stopMusic();
           _state = State.FadeOut;
